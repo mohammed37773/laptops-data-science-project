@@ -1,0 +1,7 @@
+.ipynb_checkpoints/
+private/
+*.ipynb
+*.ini
+*.ico
+helper.py
+test.csv
