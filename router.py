@@ -59,14 +59,28 @@ elif side_bar == 'Tables':
     with p1_c3:
         st.write('<h3 style = "text-align: 10%; color: #00ef6d;">Trending Brands</h3>',
                  unsafe_allow_html=True)
-        
-        st.dataframe(pd.DataFrame(df.brand.str.lower().value_counts(normalize=True)), column_config={
-            "brand": st.column_config.ProgressColumn("percentage", min_value=0, max_value=1)})
+        temp = df.brand.str.lower().value_counts(normalize=True).reset_index()
+        temp.rename(columns={"brand":"percentage", "index": "brand"}, inplace=True)
+        temp.index += 1
+
+        st.dataframe(pd.DataFrame(temp),
+                      column_config={
+            "brand": "brand",
+            "percentage": st.column_config.ProgressColumn("percentage", min_value=0, max_value=1)}
+            )
     with p1_c4:
         st.write('<h3 style = "text-align: 10%; color: #00ef6d;">Trending Colors</h3>',
                  unsafe_allow_html=True)
-        st.dataframe(pd.DataFrame(df.color.str.lower().value_counts(normalize=True)), column_config={
-            "color": st.column_config.ProgressColumn(label="percentage", min_value=0, max_value=1)})
+        
+        temp = df.color.str.lower().value_counts(normalize=True).reset_index()
+        temp.rename(columns={"color":"percentage", "index": "color"}, inplace=True)
+        temp.index += 1
+
+        st.dataframe(pd.DataFrame(temp),
+                      column_config={
+            "color": "color",
+            "percentage": st.column_config.ProgressColumn("percentage", min_value=0, max_value=1)}
+            )
 
 
 # page 3
