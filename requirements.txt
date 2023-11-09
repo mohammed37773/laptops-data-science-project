@@ -6,7 +6,11 @@ missingno==0.5.2
 numpy==1.23.5
 pandas==2.0.3
 plotly==5.16.1
+<<<<<<< HEAD
 scikit_learn==1.2.2
+=======
+scikit-learn==1.2.2
+>>>>>>> 45b75e1999c9937aa1d63e75bb59e0c0e91d3045
 seaborn==0.13.0
 sklearn_features==0.0.2
 streamlit==1.27.2
