@@ -65,7 +65,7 @@ elif side_bar == 'Tables':
 
         st.dataframe(pd.DataFrame(temp),
                       column_config={
-            "brand": "brand",
+            "brand": st.column_config.TextColumn(label="brand"),
             "percentage": st.column_config.ProgressColumn("percentage", min_value=0, max_value=1)}
             )
     with p1_c4:
@@ -78,7 +78,7 @@ elif side_bar == 'Tables':
 
         st.dataframe(pd.DataFrame(temp),
                       column_config={
-            "color": "color",
+            "color": st.column_config.TextColumn(label="color"),
             "percentage": st.column_config.ProgressColumn("percentage", min_value=0, max_value=1)}
             )
 
