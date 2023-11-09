@@ -1,7 +1,8 @@
 .ipynb_checkpoints/
-private/
+urls/
 *.ipynb
 *.ini
 *.ico
-helper.py
-test.csv
+*bat
+csv_files/test.csv
+*bat
