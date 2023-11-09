@@ -29,7 +29,7 @@ st.set_page_config(
 
 # navigation sidebar
 side_bar = st.sidebar.radio(':green[Select page]', [
-                            'Dataset', 'Table', 'Charts', "Prediction"])
+                            'Dataset', 'Tables', 'Charts', "Prediction"])
 
 
 # page1
@@ -41,7 +41,7 @@ if side_bar == 'Dataset':
 
 
 # page2
-elif side_bar == 'Table':
+elif side_bar == 'Tables':
     st.write('<h1 style = "text-align: center; color: #00ef6d;">Descriptive statistics</h1>',
              unsafe_allow_html=True)
     num_col, cat_col = st.columns([1, 1])
@@ -59,13 +59,14 @@ elif side_bar == 'Table':
     with p1_c3:
         st.write('<h3 style = "text-align: 10%; color: #00ef6d;">Trending Brands</h3>',
                  unsafe_allow_html=True)
-        st.dataframe(df_cleaned.brand.value_counts(normalize=True), column_config={
-            "brand": st.column_config.ProgressColumn("Market percentage", min_value=0, max_value=1)})
+        
+        st.dataframe(pd.DataFrame(df.brand.str.lower().value_counts(normalize=True)), column_config={
+            "brand": st.column_config.ProgressColumn("percentage", min_value=0, max_value=1)})
     with p1_c4:
         st.write('<h3 style = "text-align: 10%; color: #00ef6d;">Trending Colors</h3>',
                  unsafe_allow_html=True)
-        st.dataframe(df.color.str.lower().value_counts(normalize=True), column_config={
-            "color": st.column_config.ProgressColumn("color", min_value=0, max_value=1)})
+        st.dataframe(pd.DataFrame(df.color.str.lower().value_counts(normalize=True)), column_config={
+            "color": st.column_config.ProgressColumn(label="percentage", min_value=0, max_value=1)})
 
 
 # page 3
@@ -129,10 +130,10 @@ elif side_bar == "Charts":
     with tab3:
         # st.dataframe(pd.DataFrame([],
         #              columns=["", "", "", ""]))
-        st.dataframe(pd.DataFrame({"X-axis":["ram"],
-                                   "y-axis":["hard disk"],
-                                   "color":["brand"], 
-                                   "size":["price"]}))
+        st.dataframe(pd.DataFrame({"X-axis": ["ram"],
+                                   "y-axis": ["hard disk"],
+                                   "color": ["brand"],
+                                   "size": ["price"]}))
 
         p3_t3_fig1 = px.scatter(df_cleaned, x="ram", y="harddisk",
                                 color="brand", size="price", width=550, color_continuous_scale="Greens")
