@@ -59,11 +59,11 @@ elif side_bar == 'Tables':
     with p1_c3:
         st.write('<h3 style = "text-align: 10%; color: #00ef6d;">Trending Brands</h3>',
                  unsafe_allow_html=True)
-        temp = df.brand.str.lower().value_counts(normalize=True).reset_index()
-        temp.rename(columns={"brand":"percentage", "index": "brand"}, inplace=True)
+        temp = df.brand.str.lower().value_counts(normalize=True)
+        temp = pd.DataFrame({"brand": temp.index.to_list(), "percentage": temp.values.flatten()})
         temp.index += 1
 
-        st.dataframe(pd.DataFrame(temp),
+        st.dataframe(temp,
                       column_config={
             "brand": st.column_config.TextColumn(label="brand"),
             "percentage": st.column_config.ProgressColumn("percentage", min_value=0, max_value=1)}
@@ -72,11 +72,11 @@ elif side_bar == 'Tables':
         st.write('<h3 style = "text-align: 10%; color: #00ef6d;">Trending Colors</h3>',
                  unsafe_allow_html=True)
         
-        temp = df.color.str.lower().value_counts(normalize=True).reset_index()
-        temp.rename(columns={"color":"percentage", "index": "color"}, inplace=True)
+        temp = df.color.str.lower().value_counts(normalize=True)
+        temp = pd.DataFrame({"color": temp.index.to_list(), "percentage": temp.values.flatten()})
         temp.index += 1
 
-        st.dataframe(pd.DataFrame(temp),
+        st.dataframe(temp,
                       column_config={
             "color": st.column_config.TextColumn(label="color"),
             "percentage": st.column_config.ProgressColumn("percentage", min_value=0, max_value=1)}
