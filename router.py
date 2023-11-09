@@ -4,15 +4,14 @@ import numpy as np
 import os
 import plotly.express as px
 import joblib
-import pickle
+
 
 # global variables
 cwd = os.getcwd()
 df = pd.read_csv(os.path.join(cwd, 'dataset.csv'))
 df_cleaned = pd.read_csv(os.path.join(cwd, 'csv_files', 'dataset_cleaned.csv'))
 
-with open("m_pipe.pickle", "rb") as file:
-    main_pipe = pickle.load(file)
+main_pipe = joblib.load(os.path.join(cwd, "main_pipe.joblib"))
 
 rf_model = joblib.load(os.path.join(cwd, "models", "rf_model.h5"))
 knn_model = joblib.load(os.path.join(cwd, "models", "knn_model.h5"))
@@ -30,11 +29,11 @@ st.set_page_config(
 
 # navigation sidebar
 side_bar = st.sidebar.radio(':green[Select page]', [
-                            'Dataset overview', 'Descriptive statistics', 'Charts', "Prediction"])
+                            'Dataset', 'Table', 'Charts', "Prediction"])
 
 
 # page1
-if side_bar == 'Dataset overview':
+if side_bar == 'Dataset':
     st.write('<h1 style = "text-align: center; color: #00ef6d;">Dataset overview</h1>',
              unsafe_allow_html=True)
     space1, col, space2 = st.columns([1, 7, 1])
@@ -42,7 +41,7 @@ if side_bar == 'Dataset overview':
 
 
 # page2
-elif side_bar == 'Descriptive statistics':
+elif side_bar == 'Table':
     st.write('<h1 style = "text-align: center; color: #00ef6d;">Descriptive statistics</h1>',
              unsafe_allow_html=True)
     num_col, cat_col = st.columns([1, 1])
@@ -128,8 +127,16 @@ elif side_bar == "Charts":
         st.plotly_chart(p3_t2_fig1)
 # tab3
     with tab3:
-        st.write('<h3 style = "text-align: 10%; color: #00ef6d;">Coming soon</h3>',
-                 unsafe_allow_html=True)
+        # st.dataframe(pd.DataFrame([],
+        #              columns=["", "", "", ""]))
+        st.dataframe(pd.DataFrame({"X-axis":["ram"],
+                                   "y-axis":["hard disk"],
+                                   "color":["brand"], 
+                                   "size":["price"]}))
+
+        p3_t3_fig1 = px.scatter(df_cleaned, x="ram", y="harddisk",
+                                color="brand", size="price", width=550, color_continuous_scale="Greens")
+        st.plotly_chart(p3_t3_fig1)
 
 # tab4
     with tab4:

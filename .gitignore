@@ -3,6 +3,6 @@ urls/
 *.ipynb
 *.ini
 *.ico
-*bat
+*.bat
+*.pickle
 csv_files/test.csv
-*bat
