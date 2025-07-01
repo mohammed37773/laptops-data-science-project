@@ -11,3 +11,4 @@ seaborn==0.13.0
 sklearn_features==0.0.2
 streamlit==1.27.2
 setuptools
+distutils
